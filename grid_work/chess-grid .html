@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chess grid</title>
+</head>
+<body>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .chessboard {
+            width: 400px;
+            height: 400px;
+            border: 3px solid #333;
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+        }
+        
+        .square {
+            background-color: #f0d9b5; /* light squares default */
+        }
+        
+        /* Dark squares - every other square in alternating pattern */
+        .square:nth-child(odd) { background-color: #b58863; }
+        .square:nth-child(even) { background-color: #f0d9b5; }
+        
+        /* Fix the pattern for even rows */
+        .square:nth-child(8n+1),
+        .square:nth-child(8n+3),
+        .square:nth-child(8n+5),
+        .square:nth-child(8n+7) {
+            background-color: #f0d9b5;
+        }
+        
+        .square:nth-child(8n+2),
+        .square:nth-child(8n+4),
+        .square:nth-child(8n+6),
+        .square:nth-child(8n+8) {
+            background-color: #b58863;
+        }
+        
+        /* Alternate pattern for rows 2, 4, 6, 8 */
+        .square:nth-child(n+9):nth-child(-n+16):nth-child(odd),
+        .square:nth-child(n+25):nth-child(-n+32):nth-child(odd),
+        .square:nth-child(n+41):nth-child(-n+48):nth-child(odd),
+        .square:nth-child(n+57):nth-child(-n+64):nth-child(odd) {
+            background-color: #b58863;
+        }
+        
+        .square:nth-child(n+9):nth-child(-n+16):nth-child(even),
+        .square:nth-child(n+25):nth-child(-n+32):nth-child(even),
+        .square:nth-child(n+41):nth-child(-n+48):nth-child(even),
+        .square:nth-child(n+57):nth-child(-n+64):nth-child(even) {
+            background-color: #f0d9b5;
+        }
+    </style>
+</head>
+<body>
+    <div class="chessboard">
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+    </div>
+</body>
+</html>
+</body>
+</html>

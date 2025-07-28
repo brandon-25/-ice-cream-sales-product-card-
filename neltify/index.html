@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Assessment & Setup Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .form-container {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+        }
+        
+        .section h2 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-icon {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-row.three-col {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #34495e;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin-right: 8px;
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        
+        .radio-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .radio-item input[type="radio"] {
+            width: auto;
+            margin-right: 8px;
+        }
+        
+        .scale-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        
+        .scale-labels {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .submit-section {
+            background: #f8f9fa;
+            padding: 30px;
+            margin: 0 -40px;
+            text-align: center;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: #ecf0f1;
+            margin: 20px 0;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+        
+        .required {
+            color: #e74c3c;
+        }
+        
+        .help-text {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row,
+            .form-row.three-col {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                margin: 10px;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Client Assessment & Setup Form</h1>
+            <p>Complete assessment for systematic client acquisition & business scaling</p>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        
+        <form class="form-container" id="assessmentForm">
+            <!-- Contact Information -->
+            <div class="section">
+                <h2><span class="section-icon">👤</span>Contact Information</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullName">Full Name <span class="required">*</span></label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="timezone">Timezone</label>
+                        <select id="timezone" name="timezone">
+                            <option value="">Select Timezone</option>
+                            <option value="EST">Eastern (EST)</option>
+                            <option value="CST">Central (CST)</option>
+                            <option value="MST">Mountain (MST)</option>
+                            <option value="PST">Pacific (PST)</option>
+                            <option value="CET">Central European (CET)</option>
+                            <option value="GMT">Greenwich Mean (GMT)</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Business Information -->
+            <div class="section">
+                <h2><span class="section-icon">🏢</span>Business Information</h2>
+                <div class="form-group">
+                    <label for="businessName">Business/Agency Name</label>
+                    <input type="text" id="businessName" name="businessName">
+                </div>
+                <div class="form-group">
+                    <label for="businessType">Business Type <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="freelancer" name="businessType" value="freelancer">
+                            <label for="freelancer">Freelancer</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="agency" name="businessType" value="agency">
+                            <label for="agency">Agency</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="consultant" name="businessType" value="consultant">
+                            <label for="consultant">Consultant</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="startup" name="businessType" value="startup">
+                            <label for="startup">Startup</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="experience">Years of Experience</label>
+                    <select id="experience" name="experience">
+                        <option value="">Select Experience Level</option>
+                        <option value="0-1">0-1 years</option>
+                        <option value="1-3">1-3 years</option>
+                        <option value="3-5">3-5 years</option>
+                        <option value="5-10">5-10 years</option>
+                        <option value="10+">10+ years</option>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="website">Website URL</label>
+                    <input type="text" id="website" name="website" placeholder="https://yourwebsite.com">
+                </div>
+            </div>
+
+            <!-- Services & Expertise -->
+            <div class="section">
+                <h2><span class="section-icon">🛠️</span>Services & Expertise</h2>
+                <div class="form-group">
+                    <label>Primary Services Offered <span class="required">*</span></label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="webDesign" name="services" value="webDesign">
+                            <label for="webDesign">Web Design</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="productDesign" name="services" value="productDesign">
+                            <label for="productDesign">Product Design</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="uiux" name="services" value="uiux">
+                            <label for="uiux">UI/UX Design</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="landingPages" name="services" value="landingPages">
+                            <label for="landingPages">Landing Pages</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="development" name="services" value="development">
+                            <label for="development">Development</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="audit" name="services" value="audit">
+                            <label for="audit">Website Audit</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="consulting" name="services" value="consulting">
+                            <label for="consulting">Strategy Consulting</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="other" name="services" value="other">
+                            <label for="other">Other</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="expertise">Technical Expertise</label>
+                    <textarea id="expertise" name="expertise" placeholder="List your main technical skills, tools, and platforms you work with (e.g., Framer, Figma, React, etc.)"></textarea>
+                </div>
+            </div>
+
+            <!-- Target Market -->
+            <div class="section">
+                <h2><span class="section-icon">🎯</span>Target Market & Ideal Clients</h2>
+                <div class="form-group">
+                    <label>Target Industries/Niches</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="saas" name="industries" value="saas">
+                            <label for="saas">SaaS</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="fintech" name="industries" value="fintech">
+                            <label for="fintech">FinTech</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="ai" name="industries" value="ai">
+                            <label for="ai">AI/Tech</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="b2b" name="industries" value="b2b">
+                            <label for="b2b">B2B Services</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="startups" name="industries" value="startups">
+                            <label for="startups">Startups</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="ecommerce" name="industries" value="ecommerce">
+                            <label for="ecommerce">E-commerce</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="healthcare" name="industries" value="healthcare">
+                            <label for="healthcare">Healthcare</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="consulting" name="industries" value="consulting">
+                            <label for="consulting">Consulting</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="clientSize">Preferred Client Size</label>
+                        <select id="clientSize" name="clientSize">
+                            <option value="">Select Client Size</option>
+                            <option value="solo">Solo Entrepreneurs</option>
+                            <option value="small">Small Business (2-10 employees)</option>
+                            <option value="medium">Medium Business (11-50 employees)</option>
+                            <option value="large">Large Business (50+ employees)</option>
+                            <option value="enterprise">Enterprise (500+ employees)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="geography">Target Geography <span class="required">*</span></label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="usa" name="geography" value="usa">
+                                <label for="usa">USA</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="uk" name="geography" value="uk">
+                                <label for="uk">UK</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="canada" name="geography" value="canada">
+                                <label for="canada">Canada</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="australia" name="geography" value="australia">
+                                <label for="australia">Australia</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="europe" name="geography" value="europe">
+                                <label for="europe">Europe</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="global" name="geography" value="global">
+                                <label for="global">Global</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Current Situation -->
+            <div class="section">
+                <h2><span class="section-icon">📊</span>Current Business Situation</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="monthlyRevenue">Current Monthly Revenue (USD)</label>
+                        <select id="monthlyRevenue" name="monthlyRevenue">
+                            <option value="">Select Range</option>
+                            <option value="0-1k">$0 - $1,000</option>
+                            <option value="1k-3k">$1,000 - $3,000</option>
+                            <option value="3k-5k">$3,000 - $5,000</option>
+                            <option value="5k-10k">$5,000 - $10,000</option>
+                            <option value="10k-20k">$10,000 - $20,000</option>
+                            <option value="20k+">$20,000+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="currentClients">Current Active Clients</label>
+                        <input type="number" id="currentClients" name="currentClients" min="0">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="avgProjectValue">Average Project Value (USD)</label>
+                        <input type="number" id="avgProjectValue" name="avgProjectValue" min="0" placeholder="e.g., 5000">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectDuration">Typical Project Duration</label>
+                        <select id="projectDuration" name="projectDuration">
+                            <option value="">Select Duration</option>
+                            <option value="1-2weeks">1-2 weeks</option>
+                            <option value="1month">1 month</option>
+                            <option value="2-3months">2-3 months</option>
+                            <option value="3-6months">3-6 months</option>
+                            <option value="6-12months">6-12 months</option>
+                            <option value="12months+">12+ months</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="leadSources">Current Lead Generation Methods</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="referrals" name="leadSources" value="referrals">
+                            <label for="referrals">Referrals</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="linkedin" name="leadSources" value="linkedin">
+                            <label for="linkedin">LinkedIn</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="coldEmail" name="leadSources" value="coldEmail">
+                            <label for="coldEmail">Cold Email</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="socialMedia" name="leadSources" value="socialMedia">
+                            <label for="socialMedia">Social Media</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="networking" name="leadSources" value="networking">
+                            <label for="networking">Networking</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="website" name="leadSources" value="website">
+                            <label for="website">Website/SEO</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="paidAds" name="leadSources" value="paidAds">
+                            <label for="paidAds">Paid Advertising</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="freelancePlatforms" name="leadSources" value="freelancePlatforms">
+                            <label for="freelancePlatforms">Freelance Platforms</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Challenges & Goals -->
+            <div class="section">
+                <h2><span class="section-icon">🎯</span>Challenges & Goals</h2>
+                <div class="form-group">
+                    <label for="mainChallenges">Main Business Challenges (Select all that apply)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="findingClients" name="challenges" value="findingClients">
+                            <label for="findingClients">Finding quality clients</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="pricing" name="challenges" value="pricing">
+                            <label for="pricing">Pricing & positioning</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="consistency" name="challenges" value="consistency">
+                            <label for="consistency">Inconsistent income</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="scaling" name="challenges" value="scaling">
+                            <label for="scaling">Scaling operations</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="timeManagement" name="challenges" value="timeManagement">
+                            <label for="timeManagement">Time management</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="salesProcess" name="challenges" value="salesProcess">
+                            <label for="salesProcess">Sales & closing</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="marketing" name="challenges" value="marketing">
+                            <label for="marketing">Marketing & branding</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="systems" name="challenges" value="systems">
+                            <label for="systems">Business systems</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="monthlyLeads">Current Monthly Qualified Leads</label>
+                        <input type="number" id="monthlyLeads" name="monthlyLeads" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="conversionRate">Approximate Conversion Rate (%)</label>
+                        <input type="number" id="conversionRate" name="conversionRate" min="0" max="100" placeholder="e.g., 20">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="revenueGoal">3-Month Revenue Goal (USD)</label>
+                    <select id="revenueGoal" name="revenueGoal">
+                        <option value="">Select Goal</option>
+                        <option value="5k">$5,000/month</option>
+                        <option value="10k">$10,000/month</option>
+                        <option value="15k">$15,000/month</option>
+                        <option value="20k">$20,000/month</option>
+                        <option value="30k">$30,000/month</option>
+                        <option value="50k">$50,000+/month</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="clientGoal">Ideal Number of New Clients per Month</label>
+                    <input type="number" id="clientGoal" name="clientGoal" min="0" placeholder="e.g., 4">
+                </div>
+            </div>
+
+            <!-- Investment & Commitment -->
+            <div class="section">
+                <h2><span class="section-icon">💰</span>Investment & Commitment</h2>
+                <div class="form-group">
+                    <label for="timeCommitment">Available Time Commitment (hours/week)</label>
+                    <select id="timeCommitment" name="timeCommitment">
+                        <option value="">Select Time Commitment</option>
+                        <option value="5-10">5-10 hours/week</option>
+                        <option value="10-20">10-20 hours/week</option>
+                        <option value="20-30">20-30 hours/week</option>
+                        <option value="30-40">30-40 hours/week</option>
+                        <option value="40+">40+ hours/week (Full-time)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="investmentCapacity">Monthly Investment Capacity for Tools & Leads (USD)</label>
+                    <select id="investmentCapacity" name="investmentCapacity">
+                        <option value="">Select Range</option>
+                        <option value="0-250">$0 - $250</option>
+                        <option value="250-500">$250 - $500</option>
+                        <option value="500-1000">$500 - $1,000</option>
+                        <option value="1000-2000">$1,000 - $2,000</option>
+                        <option value="2000+">$2,000+</option>
+                        <option value="none">Currently no budget available</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="partnershipInterest">Interest in Partnership Model</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="commission" name="partnershipInterest" value="commission">
+                            <label for="commission">Commission-based (pay % of closed deals)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="monthly" name="partnershipInterest" value="monthly">
+                            <label for="monthly">Monthly retainer model</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="hybrid" name="partnershipInterest" value="hybrid">
+                            <label for="hybrid">Hybrid (low retainer + commission)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="discuss" name="partnershipInterest" value="discuss">
+                            <label for="discuss">Open to discussion</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Setup -->
+            <div class="section">
+                <h2><span class="section-icon">⚙️</span>Technical & Marketing Assets</h2>
+                <div class="form-group">
+                    <label for="portfolioStatus">Portfolio/Website Status</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="live" name="portfolioStatus" value="live">
+                            <label for="live">Live and professional</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="developing" name="portfolioStatus" value="developing">
+                            <label for="developing">Currently developing</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="needs" name="portfolioStatus" value="needs">
+                            <label for="needs">Needs major updates</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="none" name="portfolioStatus" value="none">
+                            <label for="none">No website yet</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="caseStudies">Number of Case Studies Available</label>
+                    <input type="number" id="caseStudies" name="caseStudies" min="0">
+                </div>
+                <div class="form-group">
+                    <label for="socialProof">Available Social Proof</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="testimonials" name="socialProof" value="testimonials">
+                            <label for="testimonials">Client testimonials</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="reviews" name="socialProof" value="reviews">
+                            <label for="reviews">Online reviews</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="portfolioPieces" name="socialProof" value="portfolioPieces">
+                            <label for="portfolioPieces">Portfolio pieces</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="certifications" name="socialProof" value="certifications">
+                            <label for="certifications">Certifications</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="awards" name="socialProof" value="awards">
+                            <label for="awards">Awards/Recognition</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="mediaFeatures" name="socialProof" value="mediaFeatures">
+                            <label for="mediaFeatures">Media features</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="contentCreation">Content Creation Capabilities</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="videoEditing" name="contentCreation" value="videoEditing">
+                            <label for="videoEditing">Video editing</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="copywriting" name="contentCreation" value="copywriting">
+                            <label for="copywriting">Copywriting</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="socialContent" name="contentCreation" value="socialContent">
+                            <label for="socialContent">Social media content</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="blogging" name="contentCreation" value="blogging">
+                            <label for="blogging">Blog writing</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sales & Communication -->
+            <div class="section">
+                <h2><span class="section-icon">💬</span>Sales & Communication</h2>
+                <div class="form-group">
+                    <label for="salesExperience">Sales Experience Level</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="beginner" name="salesExperience" value="beginner">
+                            <label for="beginner">Beginner (learning)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="intermediate" name="salesExperience" value="intermediate">
+                            <label for="intermediate">Intermediate (some success)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="advanced" name="salesExperience" value="advanced">
+                            <label for="advanced">Advanced (confident closer)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="expert" name="salesExperience" value="expert">
+                            <label for="expert">Expert (natural salesperson)</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="communicationComfort">Comfort Level with Different Communication Methods</label>
+                    <div class="form-row three-col">
+                        <div>
+                            <label for="emailComfort">Email (1-10)</label>
+                            <input type="range" id="emailComfort" name="emailComfort" min="1" max="10" value="5">
+                            <div class="scale-labels">
+                                <span>Uncomfortable</span>
+                                <span>Very Comfortable</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="phoneComfort">Phone Calls (1-10)</label>
+                            <input type="range" id="phoneComfort" name="phoneComfort" min="1" max="10" value="5">
+                            <div class="scale-labels">
+                                <span>Uncomfortable</span>
+                                <span>Very Comfortable</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="videoComfort">Video Calls (1-10)</label>
+                            <input type="range" id="videoComfort" name="videoComfort" min="1" max="10" value="5">
+                            <div class="scale-labels">
+                                <span>Uncomfortable</span>
+                                <span>Very Comfortable</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="languageComfort">English Proficiency for Sales Calls</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="native" name="languageComfort" value="native">
+                            <label for="native">Native speaker</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="fluent" name="languageComfort" value="fluent">
+                            <label for="fluent">Fluent (comfortable)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="conversational" name="languageComfort" value="conversational">
+                            <label for="conversational">Conversational (some challenges)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="basic" name="languageComfort" value="basic">
+                            <label for="basic">Basic (need support)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expectations & Process -->
+            <div class="section">
+                <h2><span class="section-icon">🎯</span>Expectations & Process Understanding</h2>
+                <div class="form-group">
+                    <label for="idealOutcome">What would be your ideal outcome from this partnership?</label>
+                    <textarea id="idealOutcome" name="idealOutcome" placeholder="Describe your perfect scenario in 3-6 months..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="timelineExpectation">Expected Timeline to See Results</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="immediate" name="timelineExpectation" value="immediate">
+                            <label for="immediate">Immediate (1-2 weeks)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="month" name="timelineExpectation" value="month">
+                            <label for="month">1 month</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="twoMonths" name="timelineExpectation" value="twoMonths">
+                            <label for="twoMonths">2-3 months</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="longTerm" name="timelineExpectation" value="longTerm">
+                            <label for="longTerm">3+ months (building for long-term)</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="previousExperience">Previous Experience with Lead Generation Services</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="neverTried" name="previousExperience" value="neverTried">
+                            <label for="neverTried">Never tried</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="tried" name="previousExperience" value="tried">
+                            <label for="tried">Tried before (mixed results)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="goodResults" name="previousExperience" value="goodResults">
+                            <label for="goodResults">Had good results before</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="badResults" name="previousExperience" value="badResults">
+                            <label for="badResults">Had bad experiences</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Specific Requirements -->
+            <div class="section">
+                <h2><span class="section-icon">📋</span>Specific Requirements & Preferences</h2>
+                <div class="form-group">
+                    <label for="leadVolume">Preferred Lead Volume per Month</label>
+                    <select id="leadVolume" name="leadVolume">
+                        <option value="">Select Preference</option>
+                        <option value="10-20">10-20 leads (quality focused)</option>
+                        <option value="20-50">20-50 leads (balanced)</option>
+                        <option value="50-100">50-100 leads (volume focused)</option>
+                        <option value="100+">100+ leads (high volume)</option>
+                        <option value="flexible">Flexible based on results</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="outreachPreference">Preferred Outreach Methods</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="coldEmail" name="outreachPreference" value="coldEmail">
+                            <label for="coldEmail">Cold Email</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="linkedinDM" name="outreachPreference" value="linkedinDM">
+                            <label for="linkedinDM">LinkedIn DM</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="sms" name="outreachPreference" value="sms">
+                            <label for="sms">SMS</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="coldCalling" name="outreachPreference" value="coldCalling">
+                            <label for="coldCalling">Cold Calling</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="socialMedia" name="outreachPreference" value="socialMedia">
+                            <label for="socialMedia">Social Media</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="videoMessages" name="outreachPreference" value="videoMessages">
+                            <label for="videoMessages">Video Messages (Loom)</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="dealBreakers">Deal Breakers (Client types to avoid)</label>
+                    <textarea id="dealBreakers" name="dealBreakers" placeholder="Describe types of clients you prefer NOT to work with..."></textarea>
+                </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="section">
+                <h2><span class="section-icon">📝</span>Additional Information</h2>
+                <div class="form-group">
+                    <label for="motivation">What specifically motivated you to seek this type of partnership?</label>
+                    <textarea id="motivation" name="motivation" placeholder="Tell us about your current situation and what you hope to achieve..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="concerns">Any concerns or questions about the process?</label>
+                    <textarea id="concerns" name="concerns" placeholder="Share any worries or questions you have..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="additionalInfo">Additional Information</label>
+                    <textarea id="additionalInfo" name="additionalInfo" placeholder="Anything else you'd like us to know..."></textarea>
+                </div>
+            </div>
+
+            <!-- Consent & Agreements -->
+            <div class="section">
+                <h2><span class="section-icon">✅</span>Consent & Agreements</h2>
+                <div class="form-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="dataConsent" name="dataConsent" required>
+                        <label for="dataConsent">I consent to the collection and processing of my data for assessment and partnership purposes <span class="required">*</span></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="communicationConsent" name="communicationConsent" required>
+                        <label for="communicationConsent">I agree to receive communication regarding this assessment and potential partnership <span class="required">*</span></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="commitmentAcknowledgment" name="commitmentAcknowledgment" required>
+                        <label for="commitmentAcknowledgment">I understand that success requires active participation and commitment to the process <span class="required">*</span></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="noGuarantee" name="noGuarantee" required>
+                        <label for="noGuarantee">I understand that results are not guaranteed and depend on multiple factors including market conditions and execution <span class="required">*</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="submit-section">
+                <button type="submit" class="submit-btn">Submit Assessment</button>
+                <p style="margin-top: 15px; color: #666;">This assessment typically takes 10-15 minutes to complete thoroughly.</p>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Progress tracking
+        function updateProgress() {
+            const form = document.getElementById('assessmentForm');
+            const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+            const checkboxGroups = form.querySelectorAll('.checkbox-group');
+            
+            let totalFields = inputs.length;
+            let completedFields = 0;
+            
+            // Count required fields
+            inputs.forEach(input => {
+                if (input.type === 'checkbox' || input.type === 'radio') {
+                    // These are handled separately
+                } else if (input.value.trim() !== '') {
+                    completedFields++;
+                }
+            });
+            
+            // Check checkbox groups for business type and geography (required)
+            const businessTypeChecked = form.querySelector('input[name="businessType"]:checked');
+            const geographyChecked = form.querySelector('input[name="geography"]:checked');
+            const servicesChecked = form.querySelector('input[name="services"]:checked');
+            
+            if (businessTypeChecked) completedFields++;
+            if (geographyChecked) completedFields++;
+            if (servicesChecked) completedFields++;
+            
+            totalFields += 3; // Add the checkbox groups to total
+            
+            const progress = (completedFields / totalFields) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+        
+        // Add event listeners for progress tracking
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('assessmentForm');
+            const inputs = form.querySelectorAll('input, select, textarea');
+            
+            inputs.forEach(input => {
+                input.addEventListener('change', updateProgress);
+                input.addEventListener('input', updateProgress);
+            });
+            
+            // Initial progress update
+            updateProgress();
+        });
+        
+        // Form submission
+        document.getElementById('assessmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Basic validation
+            const requiredFields = this.querySelectorAll('[required]');
+            let allValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim() && field.type !== 'checkbox') {
+                    allValid = false;
+                    field.style.borderColor = '#e74c3c';
+                } else if (field.type === 'checkbox' && !field.checked) {
+                    allValid = false;
+                    field.style.outline = '2px solid #e74c3c';
+                } else {
+                    field.style.borderColor = '#27ae60';
+                    field.style.outline = 'none';
+                }
+            });
+            
+            // Check required checkbox groups
+            const businessType = this.querySelector('input[name="businessType"]:checked');
+            const geography = this.querySelector('input[name="geography"]:checked');
+            const services = this.querySelector('input[name="services"]:checked');
+            
+            if (!businessType || !geography || !services) {
+                allValid = false;
+                alert('Please complete all required sections including Business Type, Target Geography, and Services.');
+            }
+            
+            if (allValid) {
+                // Collect form data
+                const formData = new FormData(this);
+                const data = {};
+                
+                // Handle regular inputs
+                for (let [key, value] of formData.entries()) {
+                    if (data[key]) {
+                        // Handle multiple values (checkboxes)
+                        if (Array.isArray(data[key])) {
+                            data[key].push(value);
+                        } else {
+                            data[key] = [data[key], value];
+                        }
+                    } else {
+                        data[key] = value;
+                    }
+                }
+                
+                // Handle range inputs
+                const ranges = this.querySelectorAll('input[type="range"]');
+                ranges.forEach(range => {
+                    data[range.name] = range.value;
+                });
+                
+                // OPTION 1: Send via email (mailto)
+                const emailSubject = encodeURIComponent('Client Assessment Submission - ' + data.fullName);
+                const emailBody = encodeURIComponent(
+                    'Client Assessment Data:\n\n' + 
+                    JSON.stringify(data, null, 2)
+                );
+                const mailtoLink = `mailto:your-email@example.com?subject=${emailSubject}&body=${emailBody}`;
+                
+                // OPTION 2: Send via Formspree (replace with your Formspree endpoint)
+                // fetch('https://formspree.io/f/YOUR_FORM_ID', {
+                //     method: 'POST',
+                //     body: formData,
+                //     headers: {
+                //         'Accept': 'application/json'
+                //     }
+                // }).then(response => {
+                //     if (response.ok) {
+                //         alert('Assessment submitted successfully!');
+                //     } else {
+                //         alert('There was an error submitting the form.');
+                //     }
+                // });
+                
+                // OPTION 3: Send via Webhook (replace with your webhook URL)
+                // fetch('YOUR_WEBHOOK_URL', {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json',
+                //     },
+                //     body: JSON.stringify(data)
+                // });
+                
+                // For now, use mailto
+                window.location.href = mailtoLink;
+                
+                // Show success message
+                setTimeout(() => {
+                    alert('Assessment submitted successfully! We will review your information and contact you within 24-48 hours to discuss next steps.');
+                    this.reset();
+                    updateProgress();
+                }, 1000);
+                
+            } else {
+                alert('Please complete all required fields before submitting.');
+            }
+        });
+        
+        // Add smooth scrolling for better UX
+        document.querySelectorAll('.section').forEach(section => {
+            section.addEventListener('click', function() {
+                this.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+        
+        // Auto-save functionality (optional)
+        let autoSaveTimeout;
+        function autoSave() {
+            clearTimeout(autoSaveTimeout);
+            autoSaveTimeout = setTimeout(() => {
+                const formData = new FormData(document.getElementById('assessmentForm'));
+                const data = Object.fromEntries(formData);
+                localStorage.setItem('assessmentDraft', JSON.stringify(data));
+                console.log('Draft saved automatically');
+            }, 2000);
+        }
+        
+        // Load saved draft on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedDraft = localStorage.getItem('assessmentDraft');
+            if (savedDraft) {
+                const data = JSON.parse(savedDraft);
+                Object.keys(data).forEach(key => {
+                    const input = document.querySelector(`[name="${key}"]`);
+                    if (input) {
+                        if (input.type === 'checkbox' || input.type === 'radio') {
+                            if (input.value === data[key]) {
+                                input.checked = true;
+                            }
+                        } else {
+                            input.value = data[key];
+                        }
+                    }
+                });
+                updateProgress();
+            }
+        });
+        
+        // Add auto-save to all inputs
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('change', autoSave);
+                input.addEventListener('input', autoSave);
+            });
+        });
+    </script>
+</body>
+</html>

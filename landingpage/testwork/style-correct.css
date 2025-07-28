@@ -1,0 +1,27 @@
+/* to remove  browser incosistency  */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.text{
+    background-color: red;
+    color: white;
+    padding: 20px;
+    font-size: 1.2rem;
+    flex: 1;
+}
+
+.box-container{
+   display: flex; 
+   justify-content: center;
+   align-items: center;
+   background-color: rgb(89, 0, 255);
+   gap: 1rem;
+   padding: 20px;
+   flex-direction: row;
+}
+.box-container:hover{
+    transform: translate(-2px);
+    background-color: blue;
+}
