@@ -271,12 +271,19 @@
           <polyline points="20 6 9 17 4 12" />
         </svg>
       </div>
-      <p>You're on the list! Check <strong id="confirmEmail">your inbox</strong>
-        to confirm your subscription.</p>
+      <p>Taking you to confirm <strong id="confirmEmail">your subscription</strong>
+        with beehiiv&hellip;</p>
     </div>
   </main>
 
   <script>
+    // ── beehiiv connection ───────────────────────────────────────────────
+    // Subscriptions are recorded by your beehiiv publication. On submit we
+    // send the visitor to beehiiv's hosted subscribe page with their email
+    // pre-filled; beehiiv handles confirmation / double opt-in.
+    const BEEHIIV_SUBSCRIBE_URL =
+      "https://emmanuels-newsletter-d63d38.beehiiv.com/subscribe";
+
     const form = document.getElementById("signup");
     const success = document.getElementById("success");
     const emailInput = document.getElementById("email");
@@ -294,11 +301,17 @@
         return;
       }
 
-      // Hook up your provider here (e.g. POST to your form/API endpoint).
+      // Show confirmation, then hand off to beehiiv with the email pre-filled.
       confirmEmail.textContent = email;
       form.style.display = "none";
       document.querySelector(".note").style.display = "none";
       success.classList.add("show");
+
+      const target =
+        BEEHIIV_SUBSCRIBE_URL + "?email=" + encodeURIComponent(email);
+      setTimeout(function () {
+        window.location.href = target;
+      }, 900);
     });
 
     emailInput.addEventListener("input", function () {
